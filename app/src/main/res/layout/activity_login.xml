@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/nenchinh"
+    tools:context=".LoginActivity">
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+        android:text="Đăng nhập"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"/>
+    <EditText
+        android:id="@+id/etk"
+        android:minWidth="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv1"
+        android:layout_centerHorizontal="true"
+        android:hint="Tên đăng nhập"
+        android:textColor="@color/black"
+        android:layout_marginTop="60dp"
+        android:textSize="30dp"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emk"
+        android:textSize="30dp"
+        android:minWidth="200dp"
+        android:inputType="textPassword"
+        android:layout_below="@+id/etk"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Mật khẩu"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bdn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emk"
+        android:layout_centerHorizontal="true"
+        android:text="Đăng nhập"
+        android:layout_marginTop="30dp"/>
+    <CheckBox
+        android:id="@+id/nmk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhớ mật khẩu?"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/bdn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ecmk"
+        android:inputType="textPassword"
+        android:layout_below="@+id/emk"
+        android:visibility="invisible"
+        android:hint="Xác nhận mk"
+        android:textSize="30dp"
+        android:minWidth="200dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bdk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bdn"
+        android:layout_centerHorizontal="true"
+        android:text="Đăng ký"
+        android:visibility="invisible"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:id="@+id/tdk"
+        android:textSize="20dp"
+        android:textColor="#3d34eb"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bdn"
+        android:layout_centerHorizontal="true"
+        android:text="Chưa có tài khoản? Đăng ký"
+        android:layout_marginTop="40dp"/>
+    <TextView
+        android:id="@+id/tdn"
+        android:textSize="20dp"
+        android:textColor="#3d34eb"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tdk"
+        android:layout_centerHorizontal="true"
+        android:text="Đã có tài khoản? Đăng nhập"
+        android:visibility="invisible"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>
