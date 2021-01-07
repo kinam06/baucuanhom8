@@ -10,23 +10,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baucua.Object.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
+    LinearLayout ldn, ldk;
     CheckBox nmk;
     TextView tdk,tdn,tt;
-    EditText eus,epw,ecpw;
+    EditText eus,epw,erus,erpw,ecpw,efn,eemail,esdt;
     Button bdn,bdk;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sEditor;
+    public static User logedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         anhXa();
-        sharedPreferences = getSharedPreferences("us", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("us", 0);
         sEditor = sharedPreferences.edit();
         eus.setText(sharedPreferences.getString("user",""));
         epw.setText(sharedPreferences.getString("pass",""));
@@ -37,12 +46,19 @@ public class LoginActivity extends AppCompatActivity {
         tt = findViewById(R.id.tv1);
         tdk = findViewById(R.id.tdk);
         tdn = findViewById(R.id.tdn);
-        eus = findViewById(R.id.etk);
-        epw = findViewById(R.id.emk);
-        ecpw = findViewById(R.id.ecmk);
+        eus = findViewById(R.id.edntk);
+        epw = findViewById(R.id.ednmk);
+        erus = findViewById(R.id.edktk);
+        erpw = findViewById(R.id.edkmk);
+        ecpw = findViewById(R.id.exnmk);
+        efn = findViewById(R.id.efullname);
+        eemail = findViewById(R.id.eemail);
+        esdt = findViewById(R.id.esdt);
         bdn = findViewById(R.id.bdn);
         bdk = findViewById(R.id.bdk);
         nmk = findViewById(R.id.nmk);
+        ldn = findViewById(R.id.lndn);
+        ldk = findViewById(R.id.lndk);
     }
     private void events(){
         tdk.setOnClickListener(new View.OnClickListener() {
@@ -51,13 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        ecpw.setVisibility(View.VISIBLE);
-                        bdn.setVisibility(View.INVISIBLE);
-                        tdk.setVisibility(View.INVISIBLE);
-                        bdk.setVisibility(View.VISIBLE);
-                        tdn.setVisibility(View.VISIBLE);
-                        nmk.setVisibility(View.INVISIBLE);
-                        tt.setText("Đăng ký");
+                        ldn.setVisibility(View.INVISIBLE);
+                        ldk.setVisibility(View.VISIBLE);
                     }
                 },200);
             }
@@ -68,13 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        ecpw.setVisibility(View.INVISIBLE);
-                        tdk.setVisibility(View.VISIBLE);
-                        bdk.setVisibility(View.INVISIBLE);
-                        bdn.setVisibility(View.VISIBLE);
-                        tdn.setVisibility(View.INVISIBLE);
-                        nmk.setVisibility(View.VISIBLE);
-                        tt.setText("Đăng nhập");
+                        ldk.setVisibility(View.INVISIBLE);
+                        ldn.setVisibility(View.VISIBLE);
                     }
                 },200);
             }
@@ -82,27 +88,69 @@ public class LoginActivity extends AppCompatActivity {
         bdk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (epw.getText().length()==0||eus.getText().length()==0||ecpw.getText().length()==0)
-                    Toast.makeText(getApplicationContext(),"Vui lòng nhập đầy đủ thông tin!",Toast.LENGTH_SHORT).show();
-                else if (!epw.getText().toString().equals(ecpw.getText().toString()))
-                    Toast.makeText(getApplicationContext(),"Xác nhận mật khẩu không đúng!",Toast.LENGTH_SHORT).show();
-                else{
-                    Toast.makeText(getApplicationContext(),"Đăng ký thành công!",Toast.LENGTH_SHORT).show();
-                    ecpw.setText("");
-                    ecpw.setVisibility(View.INVISIBLE);
-                    tdk.setVisibility(View.VISIBLE);
-                    bdk.setVisibility(View.INVISIBLE);
-                    bdn.setVisibility(View.VISIBLE);
-                    tdn.setVisibility(View.INVISIBLE);
-                    nmk.setVisibility(View.VISIBLE);
-                    tt.setText("Đăng nhập");
+                if (erpw.getText().toString().trim().length() == 0 || erus.getText().toString().trim().length() == 0
+                        || ecpw.getText().toString().trim().length() == 0 || efn.getText().toString().trim().length() == 0
+                        || eemail.getText().toString().trim().length() == 0 || esdt.getText().toString().trim().length() == 0)
+                    Toast.makeText(getApplicationContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                else if (!erpw.getText().toString().equals(ecpw.getText().toString()))
+                    Toast.makeText(getApplicationContext(), "Xác nhận mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
+                else {
+                    User user = new User(erus.getText().toString().trim(), erpw.getText().toString(),
+                            efn.getText().toString().trim(), esdt.getText().toString(), eemail.getText().toString().trim());
+                    ApiClient.getApiService().reg(user).enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            eus.setText(erus.getText().toString());
+                            epw.setText(erpw.getText().toString());
+                            erus.setText("");
+                            erpw.setText("");
+                            ecpw.setText("");
+                            efn.setText("");
+                            eemail.setText("");
+                            esdt.setText("");
+                            ldk.setVisibility(View.INVISIBLE);
+                            ldn.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
         bdn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                User user = new User(eus.getText().toString(),epw.getText().toString());
+                ApiClient.getApiService().login(user).enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                       try {
+                           if (response.body().getMessage().equals("LOGIN SUCCESSFULLY")){
+                               Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                               logedInUser = new User(eus.getText().toString(),
+                                       epw.getText().toString(),
+                                       response.body().getBalance(),
+                                       response.body().getEmail(),
+                                       response.body().getFullname(),
+                                       response.body().getPhone(),
+                                       response.body().getUser_type());
+                               startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                               finish();
+                           }
+                       }catch (Exception e){
+                           Toast.makeText(getApplicationContext(),"Sai tên đăng nhập hoặc mật khẩu!",Toast.LENGTH_SHORT).show();
+                       };
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
                 if (nmk.isChecked()==true) {
                     sEditor.putString("user", eus.getText().toString());
                     sEditor.putString("pass", epw.getText().toString());
@@ -115,9 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                     sEditor.putBoolean("checked",false);
                     sEditor.commit();
                 }
-                intent.putExtra("username",eus.getText().toString());
-                startActivity(intent);
-                finish();
             }
         });
     }

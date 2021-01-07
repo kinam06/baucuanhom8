@@ -1,18 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_alignParentTop="true"
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/nenchinh">
+        <TextView
+            android:id="@+id/txtuserbalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text=""
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/btnlogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="Đăng xuất"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:onClick="logout"/>
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/fmain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/topbar"
+        android:visibility="invisible"/>
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/topbar"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/phinh">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="60dip"
+            android:layout_gravity="center"
+            android:id="@+id/btntx"
+            android:layout_width="140dip"
+            android:layout_height="50dip"
+            android:text="Tài xỉu"
+            android:onClick="taixiu"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="20dip"
+            android:layout_gravity="center"
+            android:id="@+id/btnbc"
+            android:layout_width="140dip"
+            android:layout_height="50dip"
+            android:text="Bầu cua"
+            android:onClick="baucua"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="20dip"
+            android:layout_gravity="center"
+            android:id="@+id/btnxd"
+            android:layout_width="140dip"
+            android:layout_height="50dip"
+            android:text="Xì dách"
+            android:onClick="xidach"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="20dip"
+            android:layout_gravity="center"
+            android:id="@+id/btnthoat"
+            android:layout_width="140dip"
+            android:layout_height="50dip"
+            android:text="Thoát"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
