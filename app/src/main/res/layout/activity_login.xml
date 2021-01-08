@@ -20,7 +20,7 @@
             android:text="Đăng nhập"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="40dp"/>
         <EditText
             android:id="@+id/edntk"
             android:minWidth="250dp"
@@ -83,16 +83,16 @@
             android:text="Đăng ký"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="40dp"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edktk"
-            android:hint="Tài khoản"
+            android:hint="Tên đăng nhập"
             android:textSize="25dp"
             android:minWidth="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
             android:textSize="25dp"
             android:minWidth="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
             android:textSize="25dp"
             android:minWidth="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
             android:textSize="25dp"
             android:minWidth="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
             android:textSize="25dp"
             android:minWidth="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,14 +142,14 @@
             android:textSize="25dp"
             android:minWidth="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bdk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Đăng ký"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"/>
         <TextView
             android:id="@+id/tdn"
             android:textSize="20dp"
