@@ -1,5 +1,6 @@
 package com.example.baucua;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -23,22 +24,23 @@ import retrofit2.Response;
 
 import static com.example.baucua.LoginActivity.logedInUser;
 
+
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
-    FrameLayout frameLayout;
-    TextView tbl;
+    TextView tbl,tus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         anhXa();
-        tbl.setText(logedInUser.getUsername()+": "+(int)logedInUser.getBalance());
+        tbl.setText(""+(int)logedInUser.getBalance());
+        tus.setText(logedInUser.getUsername());
     }
     private void anhXa(){
-        tbl = findViewById(R.id.txtuserbalance);
+        tbl = findViewById(R.id.txtbalancemain);
+        tus = findViewById(R.id.mainuser);
         linearLayout = findViewById(R.id.main);
-        frameLayout = findViewById(R.id.fmain);
     }
 
     public void xidach(View view) {
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void baucua(View view) {
+        Intent intent = new Intent(MainActivity.this,BauCuaActivity.class);
+        intent.putExtra("balance",tbl.getText().toString());
+        startActivityForResult(intent,1);
     }
 
     public void taixiu(View view) {
@@ -61,5 +66,12 @@ public class MainActivity extends AppCompatActivity {
         sEditor.commit();
         startActivity(new Intent(MainActivity.this,LoginActivity.class));
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1 && resultCode==RESULT_OK)
+            tbl.setText(data.getStringExtra("balancebc"));
     }
 }

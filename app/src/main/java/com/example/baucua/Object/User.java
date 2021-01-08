@@ -1,6 +1,5 @@
 package com.example.baucua.Object;
 
-import com.google.gson.annotations.SerializedName;
 
 public class User {
     private String username;
