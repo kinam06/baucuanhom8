@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
@@ -23,25 +24,34 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baucua.Object.DW;
+import com.example.baucua.Object.User;
+
 import java.util.Random;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.example.baucua.LoginActivity.logedInUser;
+import static java.lang.Math.abs;
 
 public class BauCuaActivity extends AppCompatActivity {
 
     Spinner spinner1;
-    Integer[] dsQuan = {R.drawable.conca,
-            R.drawable.concua,
-            R.drawable.bau,
-            R.drawable.nai,
-            R.drawable.contom,
-            R.drawable.conga};
+    Integer[] dsQuan = {R.drawable.ca,
+            R.drawable.cua,
+            R.drawable.bau2,
+            R.drawable.huou,
+            R.drawable.tom,
+            R.drawable.ga};
     Integer[] giatricuoc={1000,10000,100000};
     AnimationDrawable xs1, xs2, xs3;
     ImageView xucsac1, xucsac2, xucsac3;
     Button btnxucsac;
     int giatri1, giatri2, giatri3;
     Random randomxs1, randomxs2, randomxs3;
+    MediaPlayer quayxs, win, lose;
     TextView tiendatbau, tiendatcua, tiendatca, tiendathuou, tiendatga, tiendattom;
     TextView txttienhienthi, tienketqua, us;
     int tienga = 0, tienca = 0, tienbau = 0, tientom = 0, tienhuou = 0, tiencua = 0;
@@ -66,9 +76,9 @@ public class BauCuaActivity extends AppCompatActivity {
         xucsac1 = findViewById(R.id.xucsac1);
         xucsac2 = findViewById(R.id.xucsac2);
         xucsac3 = findViewById(R.id.xucsac3);
-        xucsac1.setImageResource(R.drawable.concua);
-        xucsac2.setImageResource(R.drawable.concua);
-        xucsac3.setImageResource(R.drawable.concua);
+        xucsac1.setImageResource(R.drawable.tom);
+        xucsac2.setImageResource(R.drawable.ca);
+        xucsac3.setImageResource(R.drawable.cua);
         btnxucsac = findViewById(R.id.btnxucsac);
         txttienhienthi = findViewById(R.id.txtbalancebc);
         tiendatbau = findViewById(R.id.tiendatbau);
@@ -95,7 +105,10 @@ public class BauCuaActivity extends AppCompatActivity {
                 +Integer.parseInt(tiendattom.getText().toString())+Integer.parseInt(tiendathuou.getText().toString());
         if (tiendat>Integer.parseInt(txttienhienthi.getText().toString()))
             Toast.makeText(getApplicationContext(),"Không đủ số dư!",Toast.LENGTH_SHORT).show();
+        else if (tiendat==0)
+            Toast.makeText(getApplicationContext(),"Vui lòng đặt cược",Toast.LENGTH_SHORT).show();
         else{
+            btnxucsac.setVisibility(View.INVISIBLE);
             xucsac1.setImageResource(R.drawable.animation_item);
             xucsac2.setImageResource(R.drawable.animation_item_1);
             xucsac3.setImageResource(R.drawable.animation_item_2);
@@ -105,15 +118,19 @@ public class BauCuaActivity extends AppCompatActivity {
             xs1.start();
             xs2.start();
             xs3.start();
+            quayxs = MediaPlayer.create(getApplicationContext(),R.raw.laclaclac);
+            quayxs.start();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    quayxs.stop();
                     Randomgt1();
                     Randomgt2();
                     Randomgt3();
                     xuLyThuong();
+                    btnxucsac.setVisibility(View.VISIBLE);
                 }
-            }, 2000);
+            }, 1500);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -303,14 +320,58 @@ public class BauCuaActivity extends AppCompatActivity {
         if (tienthuong>0) {
             tienketqua.setText("+" + tienthuong);
             tienketqua.setTextColor(Color.parseColor("#24fc03"));
+            win = MediaPlayer.create(getApplicationContext(),R.raw.duoctien);
+            win.start();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    win.stop();
+                }
+            },1500);
         }
         else if(tienthuong<0){
             tienketqua.setText(""+tienthuong);
+            lose = MediaPlayer.create(getApplicationContext(),R.raw.matien);
+            lose.start();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    lose.stop();
+                }
+            },1500);
             tienketqua.setTextColor(Color.parseColor("#f70008"));
         }
         else{
-            tienketqua.setTextColor(Color.parseColor("#ebe4e4"));
-            tienketqua.setText(""+tienthuong);
+            tienketqua.setTextColor(Color.parseColor("#000000"));
+            tienketqua.setText("+"+tienthuong);
+        }
+        if (tienthuong<0)
+        {
+            ApiClient.getApiService().Withdraw(new DW(logedInUser.getUsername(),String.valueOf(abs(tienthuong)))).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
+        }
+        else if (tienthuong>0)
+        {
+            ApiClient.getApiService().Deposit(new DW(logedInUser.getUsername(),String.valueOf(tienthuong))).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
         }
         tienhienthi = Integer.parseInt(txttienhienthi.getText().toString())+tienthuong;
         txttienhienthi.setText(""+tienhienthi);
@@ -361,5 +422,20 @@ public class BauCuaActivity extends AppCompatActivity {
         tiendatbau.setText("0");
         tiendattom.setText("0");
         tiendatcua.setText("0");
+    }
+
+    public void Deposit(View view) {
+        ApiClient.getApiService().Deposit(new DW(logedInUser.getUsername(),"100000")).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                int ez = Integer.parseInt(txttienhienthi.getText().toString())+100000;
+                txttienhienthi.setText(""+ez);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 }

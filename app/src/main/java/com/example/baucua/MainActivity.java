@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         anhXa();
         tbl.setText(""+(int)logedInUser.getBalance());
+        //tbl.setText(""+100000);
         tus.setText(logedInUser.getUsername());
     }
     private void anhXa(){
@@ -78,5 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickBaiCao(View view) {
         Toast.makeText(getApplicationContext(),"Đang phát triển...",Toast.LENGTH_SHORT).show();
+    }
+
+    public void exit(View view) {
+        finish();
     }
 }

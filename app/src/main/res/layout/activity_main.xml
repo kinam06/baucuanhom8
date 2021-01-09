@@ -4,28 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/cuong">
 
     <LinearLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="@drawable/backgrounda">
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
             android:id="@+id/mainuser"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="22dp"
             android:layout_gravity="center"
-            android:text="hahaha"
+            android:text="Khang"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"/>
         <TextView
+            android:padding="5dp"
             android:id="@+id/txtbalancemain"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/viewbackground"
@@ -33,7 +34,7 @@
             android:layout_gravity="center"
             android:text=""
             android:textColor="#fff"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:textStyle="bold"/>
         <ImageView
             android:layout_marginLeft="5dp"
@@ -61,8 +62,7 @@
         android:layout_below="@+id/topbar"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/cuong">
+        android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -108,7 +108,7 @@
                 android:onClick="clickBaiCao"/>
         </RelativeLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="100dp"
             android:layout_gravity="center"
             android:id="@+id/btnthoat"
             android:layout_width="140dip"
@@ -116,6 +116,7 @@
             android:background="@drawable/button"
             android:textColor="#ffffff"
             android:textStyle="bold"
+            android:onClick="exit"
             android:text="Thoát"/>
 
 

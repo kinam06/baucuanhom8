@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     LinearLayout ldn, ldk;
+    ScrollView scrollView;
     CheckBox nmk;
     TextView tdk,tdn,tt;
     EditText eus,epw,erus,erpw,ecpw,efn,eemail,esdt;
@@ -43,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         events();
     }
     private void anhXa(){
-        tt = findViewById(R.id.tv1);
         tdk = findViewById(R.id.tdk);
         tdn = findViewById(R.id.tdn);
         eus = findViewById(R.id.edntk);
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         nmk = findViewById(R.id.nmk);
         ldn = findViewById(R.id.lndn);
         ldk = findViewById(R.id.lndk);
+        scrollView =findViewById(R.id.slndk);
     }
     private void events(){
         tdk.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         ldn.setVisibility(View.INVISIBLE);
-                        ldk.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.VISIBLE);
                     }
                 },200);
             }
@@ -79,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        ldk.setVisibility(View.INVISIBLE);
+                        scrollView.setVisibility(View.INVISIBLE);
                         ldn.setVisibility(View.VISIBLE);
                     }
                 },200);
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                 else if (!erpw.getText().toString().equals(ecpw.getText().toString()))
                     Toast.makeText(getApplicationContext(), "Xác nhận mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
                 else {
-                    User user = new User(erus.getText().toString().trim(), erpw.getText().toString(),
+                    User user = new User(erus.getText().toString().toLowerCase().trim(), erpw.getText().toString(),
                             efn.getText().toString().trim(), esdt.getText().toString(), eemail.getText().toString().trim());
                     ApiClient.getApiService().reg(user).enqueue(new Callback<User>() {
                         @Override
@@ -109,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                             efn.setText("");
                             eemail.setText("");
                             esdt.setText("");
-                            ldk.setVisibility(View.INVISIBLE);
+                            scrollView.setVisibility(View.INVISIBLE);
                             ldn.setVisibility(View.VISIBLE);
                         }
 
@@ -124,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         bdn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User(eus.getText().toString(),epw.getText().toString());
+                User user = new User(eus.getText().toString().toLowerCase().trim(),epw.getText().toString());
                 ApiClient.getApiService().login(user).enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {

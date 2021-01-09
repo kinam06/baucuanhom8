@@ -1,5 +1,6 @@
 package com.example.baucua;
 
+import com.example.baucua.Object.DW;
 import com.example.baucua.Object.User;
 
 import java.util.List;
@@ -20,4 +21,9 @@ public interface ApiService {
     @GET("getAllUsers")
     Call<List<User>> getAllUsers(@Body User user);
 
+    @POST("withdraw")
+    Call<User> Withdraw(@Body DW dw);
+
+    @POST("deposit")
+    Call<User> Deposit(@Body DW dw);
 }

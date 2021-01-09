@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/backgrounda">
+    android:background="@drawable/baucuabg">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,22 +14,23 @@
             android:layout_height="wrap_content"
             android:minWidth="80dp"
             android:id="@+id/bcuser"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="22dp"
             android:layout_gravity="center"
-            android:text="hahaha"
+            android:text="Khang"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"/>
         <TextView
             android:id="@+id/txtbalancebc"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
             android:background="@drawable/viewbackground"
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="#fff"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:textStyle="bold"/>
         <ImageView
             android:layout_width="40dp"
@@ -38,10 +39,11 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"/>
         <TextView
+            android:background="#fff"
             android:id="@+id/tienkqbc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -50,6 +52,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/tangtien1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:onClick="Deposit"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/backbtn"
                 android:layout_width="50dp"
@@ -75,13 +84,12 @@
                 android:id="@+id/quanbau"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:background="@drawable/backgrounditem"
-                android:src="@drawable/bau"
+                android:src="@drawable/bau2"
                 android:onClick="clickBau"/>
             <TextView
                 android:background="@drawable/backgroundspiner"
                 android:id="@+id/tiendatbau"
-                android:layout_width="match_parent"
+                android:layout_width="93dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
@@ -101,12 +109,11 @@
                 android:onClick="clickCa"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:background="@drawable/backgrounditem"
-                android:src="@drawable/conca"/>
+                android:src="@drawable/ca"/>
             <TextView
                 android:background="@drawable/backgroundspiner"
                 android:id="@+id/tiendatca"
-                android:layout_width="match_parent"
+                android:layout_width="93dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
@@ -127,12 +134,11 @@
                 android:onClick="clickCua"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:background="@drawable/backgrounditem"
-                android:src="@drawable/concua"/>
+                android:src="@drawable/cua"/>
             <TextView
                 android:background="@drawable/backgroundspiner"
                 android:id="@+id/tiendatcua"
-                android:layout_width="match_parent"
+                android:layout_width="93dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
@@ -158,12 +164,11 @@
                 android:onClick="clickTom"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:background="@drawable/backgrounditem"
-                android:src="@drawable/contom"/>
+                android:src="@drawable/tom"/>
             <TextView
                 android:background="@drawable/backgroundspiner"
                 android:id="@+id/tiendattom"
-                android:layout_width="match_parent"
+                android:layout_width="93dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
@@ -184,13 +189,13 @@
                 android:onClick="clickGa"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:background="@drawable/backgrounditem"
-                android:src="@drawable/conga" />
+                android:src="@drawable/ga" />
 
             <TextView
                 android:background="@drawable/backgroundspiner"
                 android:id="@+id/tiendatga"
-                android:layout_width="match_parent"
+                android:layout_width="93dp
+"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
@@ -211,12 +216,11 @@
                 android:onClick="clickHuou"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:background="@drawable/backgrounditem"
-                android:src="@drawable/nai"/>
+                android:src="@drawable/huou"/>
             <TextView
                 android:background="@drawable/backgroundspiner"
                 android:id="@+id/tiendathuou"
-                android:layout_width="match_parent"
+                android:layout_width="93dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
@@ -235,13 +239,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giá trị đặt cược:"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"/>
         <Spinner
             android:layout_marginTop="1sp"
             android:id="@+id/spn1"
+            android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -258,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:text="Xoá"
                 android:textSize="22dp"
-                android:textColor="#f5001d"
+                android:textColor="#fff"
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:gravity="right"
@@ -286,13 +291,11 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/bau" />
+            android:layout_marginRight="10dp" />
         <ImageView
             android:id="@+id/xucsac3"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/bau"/>
+            android:layout_height="80dp"/>
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnxucsac"
