@@ -48,13 +48,8 @@ public class BauCuaActivity extends AppCompatActivity {
     int tienthuong, tienhienthi;
     Animation anim, animmat;
     TextView animtxt, thuacuoc1;
-    LinearLayout themtien, thuacuoctxt, thuacuocmain;
     ImageView imgdau;
     int tienthuongtxt = 0;
-    String TongTien = "tongtien";
-    String AmThanh = "amthanh";
-    SharedPreferences save_Data;
-    SharedPreferences.Editor editor;
     int tiencongtong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

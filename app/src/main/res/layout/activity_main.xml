@@ -62,40 +62,62 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/phinh">
-
-
+        android:background="@drawable/cuong">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btntx"
+                android:layout_width="120dip"
+                android:layout_height="120dip"
+                android:layout_marginTop="60dip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="55dp"
+                android:background="@drawable/icontaixiu"
+                android:onClick="taixiu" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnbc"
+                android:layout_width="120dip"
+                android:layout_height="120dip"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="55dp"
+                android:layout_marginTop="60dip"
+                android:background="@drawable/iconbaucua"
+                android:onClick="baucua" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="40dip"
+                android:id="@+id/btnxd"
+                android:layout_marginLeft="55dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="120dip"
+                android:layout_height="120dip"
+                android:background="@drawable/icon_xidach"
+                android:onClick="xidach"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnbaicao"
+                android:layout_marginRight="55dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="40dip"
+                android:layout_width="120dip"
+                android:layout_height="120dip"
+                android:background="@drawable/iconbaicao"
+                android:onClick="clickBaiCao"/>
+        </RelativeLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="60dip"
-            android:layout_gravity="center"
-            android:id="@+id/btntx"
-            android:layout_width="140dip"
-            android:layout_height="50dip"
-            android:text="Tài xỉu"
-            android:onClick="taixiu"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="20dip"
-            android:layout_gravity="center"
-            android:id="@+id/btnbc"
-            android:layout_width="140dip"
-            android:layout_height="50dip"
-            android:text="Bầu cua"
-            android:onClick="baucua"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="20dip"
-            android:layout_gravity="center"
-            android:id="@+id/btnxd"
-            android:layout_width="140dip"
-            android:layout_height="50dip"
-            android:text="Xì dách"
-            android:onClick="xidach"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="200dp"
             android:layout_gravity="center"
             android:id="@+id/btnthoat"
             android:layout_width="140dip"
             android:layout_height="50dip"
+            android:background="@drawable/button"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:text="Thoát"/>
+
 
 
     </LinearLayout>

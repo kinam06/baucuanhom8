@@ -5,11 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
+
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/phinh"
+        android:layout_width="402dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/bgcc"
         android:textColor="@color/black"
         android:textSize="30dp" />
     <TextView
@@ -17,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Easy Casino"
+        android:text="Game Vui Vãi Lone"
         android:textColor="#ecfc03"
         android:textSize="30dp"/>
 

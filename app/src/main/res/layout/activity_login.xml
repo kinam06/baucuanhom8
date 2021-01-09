@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/nenchinh"
+    android:background="@drawable/loginnn"
     tools:context=".LoginActivity">
     <LinearLayout
+        android:layout_marginTop="100dp"
         android:id="@+id/lndn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
+        <ImageView
             android:id="@+id/tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:textSize="40dp"
-            android:text="Đăng nhập"
+            android:src="@drawable/r88"
+            android:fontFamily="cursive"
             android:textStyle="bold"
+
             android:textColor="@color/black"
             android:layout_marginTop="40dp"/>
         <EditText
@@ -29,8 +32,9 @@
             android:layout_gravity="center"
             android:hint="Tên đăng nhập"
             android:textColor="@color/black"
-            android:layout_marginTop="60dp"
-            android:textSize="25dp"/>
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:background="@drawable/btn"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,33 +44,37 @@
             android:inputType="textPassword"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
+            android:background="@drawable/btn"
             android:hint="Mật khẩu"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bdn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Đăng nhập"
-            android:layout_marginTop="30dp"/>
         <CheckBox
             android:id="@+id/nmk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nhớ mật khẩu?"
             android:textSize="16dp"
-            android:textColor="@color/black"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_marginLeft="103dp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bdn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="-5dp"/>
+            android:text="Đăng nhập"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button"/>
         <TextView
             android:id="@+id/tdk"
-            android:textSize="20dp"
-            android:textColor="#3d34eb"
+            android:textSize="23dp"
+            android:textColor="#ffff00"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Chưa có tài khoản? Đăng ký"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="210dp"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/lndk"
@@ -85,6 +93,7 @@
             android:textColor="@color/black"
             android:layout_marginTop="40dp"/>
         <EditText
+            android:background="@drawable/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edktk"
@@ -94,6 +103,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp" />
         <EditText
+            android:background="@drawable/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edkmk"
@@ -104,6 +114,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp" />
         <EditText
+            android:background="@drawable/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/exnmk"
@@ -114,6 +125,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp" />
         <EditText
+            android:background="@drawable/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/efullname"
@@ -122,17 +134,20 @@
             android:minWidth="250dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp" />
+
         <EditText
+            android:background="@drawable/btn"
+            android:id="@+id/eemail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/eemail"
-            android:inputType="textEmailAddress"
-            android:hint="Email"
-            android:textSize="25dp"
-            android:minWidth="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:minWidth="250dp"
+            android:textSize="25dp" />
         <EditText
+            android:background="@drawable/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/esdt"
@@ -152,8 +167,8 @@
             android:layout_marginTop="15dp"/>
         <TextView
             android:id="@+id/tdn"
-            android:textSize="20dp"
-            android:textColor="#3d34eb"
+            android:textSize="23dp"
+            android:textColor="#ffff00"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

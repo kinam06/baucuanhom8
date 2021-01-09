@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void taixiu(View view) {
+        Toast.makeText(getApplicationContext(),"Đang phát triển...",Toast.LENGTH_SHORT).show();
     }
 
     public void logout(View view) {
@@ -73,5 +74,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==1 && resultCode==RESULT_OK)
             tbl.setText(data.getStringExtra("balancebc"));
+    }
+
+    public void clickBaiCao(View view) {
+        Toast.makeText(getApplicationContext(),"Đang phát triển...",Toast.LENGTH_SHORT).show();
     }
 }
