@@ -90,12 +90,17 @@ public class LoginActivity extends AppCompatActivity {
         bdk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bdk.setEnabled(false);
                 if (erpw.getText().toString().trim().length() == 0 || erus.getText().toString().trim().length() == 0
                         || ecpw.getText().toString().trim().length() == 0 || efn.getText().toString().trim().length() == 0
-                        || eemail.getText().toString().trim().length() == 0 || esdt.getText().toString().trim().length() == 0)
+                        || eemail.getText().toString().trim().length() == 0 || esdt.getText().toString().trim().length() == 0) {
                     Toast.makeText(getApplicationContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-                else if (!erpw.getText().toString().equals(ecpw.getText().toString()))
+                    bdk.setEnabled(true);
+                }
+                else if (!erpw.getText().toString().equals(ecpw.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Xác nhận mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
+                    bdk.setEnabled(true);
+                }
                 else {
                     User user = new User(erus.getText().toString().toLowerCase().trim(), erpw.getText().toString(),
                             efn.getText().toString().trim(), esdt.getText().toString(), eemail.getText().toString().trim());
@@ -113,11 +118,13 @@ public class LoginActivity extends AppCompatActivity {
                             esdt.setText("");
                             scrollView.setVisibility(View.INVISIBLE);
                             ldn.setVisibility(View.VISIBLE);
+                            bdk.setEnabled(true);
                         }
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
                             Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            bdk.setEnabled(true);
                         }
                     });
                 }
@@ -126,11 +133,15 @@ public class LoginActivity extends AppCompatActivity {
         bdn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //if (eus.getText().toString().length()==0||epw.getText().toString().length()==0)
+                //    Toast.makeText(getApplicationContext(),"Vui lòng nhập tên tài khoản và mật khẩu",Toast.LENGTH_SHORT).show();
+                bdn.setEnabled(false);
                 User user = new User(eus.getText().toString().toLowerCase().trim(),epw.getText().toString());
                 ApiClient.getApiService().login(user).enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                        try {
+                           bdn.setEnabled(true);
                            if (response.body().getMessage().equals("LOGIN SUCCESSFULLY")){
                                Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
                                logedInUser = new User(eus.getText().toString(),
@@ -140,17 +151,22 @@ public class LoginActivity extends AppCompatActivity {
                                        response.body().getFullname(),
                                        response.body().getPhone(),
                                        response.body().getUser_type());
-                               startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                               if (response.body().getUser_type().equals("admin"))
+                                   startActivity(new Intent(getApplicationContext(),AdminActivity.class));
+                               else
+                                   startActivity(new Intent(LoginActivity.this,MainActivity.class));
                                finish();
                            }
                        }catch (Exception e){
                            Toast.makeText(getApplicationContext(),"Sai tên đăng nhập hoặc mật khẩu!",Toast.LENGTH_SHORT).show();
+                           bdn.setEnabled(true);
                        };
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                        bdn.setEnabled(true);
                     }
                 });
                 if (nmk.isChecked()==true) {

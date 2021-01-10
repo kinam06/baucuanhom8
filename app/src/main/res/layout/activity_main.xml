@@ -108,7 +108,18 @@
                 android:onClick="clickBaiCao"/>
         </RelativeLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:id="@+id/btnlichsu"
+            android:layout_width="140dip"
+            android:layout_height="50dip"
+            android:background="@drawable/button"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:onClick="getLS"
+            android:text="Lịch sử"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:id="@+id/btnthoat"
             android:layout_width="140dip"
@@ -118,7 +129,6 @@
             android:textStyle="bold"
             android:onClick="exit"
             android:text="Thoát"/>
-
 
 
     </LinearLayout>

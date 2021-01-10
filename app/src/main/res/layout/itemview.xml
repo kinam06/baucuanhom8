@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:text="Ten user"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:id="@+id/txtusera"
+        android:textColor="@color/black"
+        android:textSize="23dp"/>
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:text="So du"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtuserbalancea"
+        android:textColor="@color/black"
+        android:textSize="20dp"/>
+    <ImageView
+        android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/coins"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rbtn"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="Xoa" />
+    </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="#aeb0af"
+        android:layout_width="match_parent"
+        android:layout_height="1.2dp"/>
+</LinearLayout>

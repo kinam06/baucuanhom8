@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/baucuabg">
     <LinearLayout
+        android:id="@+id/topbarbc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -49,16 +50,27 @@
             android:textStyle="bold"
             android:textColor="#f00509"/>
         <LinearLayout
+            android:id="@+id/topbarnt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+            <EditText
+                android:id="@+id/ntbc"
+                android:textStyle="bold"
+                android:inputType="number"
+                android:minWidth="70dp"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
             <ImageView
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:src="@drawable/tangtien1"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:onClick="Deposit"/>
+                android:onClick="Deposit"
+                android:src="@drawable/tangtien1" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/backbtn"
                 android:layout_width="50dp"
@@ -194,8 +206,7 @@
             <TextView
                 android:background="@drawable/backgroundspiner"
                 android:id="@+id/tiendatga"
-                android:layout_width="93dp
-"
+                android:layout_width="93dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
@@ -232,6 +243,11 @@
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="15dp">
@@ -251,7 +267,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:spinnerMode="dialog"/>
+            android:popupBackground="@drawable/nenchinh"
+            android:spinnerMode="dropdown"/>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"

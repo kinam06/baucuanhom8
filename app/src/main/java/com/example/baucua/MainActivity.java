@@ -16,7 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baucua.Object.Transact;
 import com.example.baucua.Object.User;
+import com.example.baucua.Object.UserName;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         anhXa();
-        tbl.setText(""+(int)logedInUser.getBalance());
+        tbl.setText(Utils.formatMoney(logedInUser.getBalance()));
         //tbl.setText(""+100000);
         tus.setText(logedInUser.getUsername());
     }
@@ -83,5 +87,28 @@ public class MainActivity extends AppCompatActivity {
 
     public void exit(View view) {
         finish();
+    }
+
+    public void adminPage(View view) {
+        startActivity(new Intent(getApplicationContext(),AdminActivity.class));
+    }
+
+    public void getLS(View view) {
+        ApiClient.getApiService().getTransaction(new UserName(logedInUser.getUsername())).enqueue(new Callback<ArrayList<Transact>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Transact>> call, Response<ArrayList<Transact>> response) {
+                try{
+                    response.body().get(0);
+                    startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
+                }catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Chưa có thông tin", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Transact>> call, Throwable t) {
+
+            }
+        });
     }
 }

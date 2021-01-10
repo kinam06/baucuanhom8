@@ -38,6 +38,7 @@ public class User {
         this.message = message;
     }
 
+
     public User(float balance, String email, String fullname, String message, String phone, String user_type) {
         this.balance = balance;
         this.email = email;

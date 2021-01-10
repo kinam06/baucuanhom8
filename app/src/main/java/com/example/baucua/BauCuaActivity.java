@@ -13,11 +13,13 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -45,7 +47,9 @@ public class BauCuaActivity extends AppCompatActivity {
             R.drawable.huou,
             R.drawable.tom,
             R.drawable.ga};
-    Integer[] giatricuoc={1000,10000,100000};
+    String[] giatricuoc={Utils.formatMoney(1000),Utils.formatMoney(2000),Utils.formatMoney(5000),Utils.formatMoney(10000)
+    ,Utils.formatMoney(20000),Utils.formatMoney(50000),Utils.formatMoney(100000)
+    ,Utils.formatMoney(200000),Utils.formatMoney(500000)};
     AnimationDrawable xs1, xs2, xs3;
     ImageView xucsac1, xucsac2, xucsac3;
     Button btnxucsac;
@@ -60,13 +64,17 @@ public class BauCuaActivity extends AppCompatActivity {
     TextView animtxt, thuacuoc1;
     ImageView imgdau;
     int tienthuongtxt = 0;
-    int tiencongtong;
+    int nt = 0;
+    EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_bau_cua);
         anhXa();
-        ArrayAdapter<Integer> adapterBC = new ArrayAdapter<Integer>(this,R.layout.spinner,giatricuoc);
+        ArrayAdapter<String> adapterBC = new ArrayAdapter<String>(this,R.layout.spinner,giatricuoc);
         spinner1.setAdapter(adapterBC);
         txttienhienthi.setText(getIntent().getStringExtra("balance"));
         us.setText(logedInUser.getUsername());
@@ -90,6 +98,7 @@ public class BauCuaActivity extends AppCompatActivity {
         tienketqua = findViewById(R.id.tienkqbc);
         spinner1 = findViewById(R.id.spn1);
         us = findViewById(R.id.bcuser);
+        editText = findViewById(R.id.ntbc);
     }
 
     public void backtomain(View view) {
@@ -100,10 +109,10 @@ public class BauCuaActivity extends AppCompatActivity {
     }
 
     public void lacBauCua(View view) {
-        int tiendat = Integer.parseInt(tiendatbau.getText().toString())+Integer.parseInt(tiendatga.getText().toString())
-                +Integer.parseInt(tiendatca.getText().toString())+Integer.parseInt(tiendatcua.getText().toString())
-                +Integer.parseInt(tiendattom.getText().toString())+Integer.parseInt(tiendathuou.getText().toString());
-        if (tiendat>Integer.parseInt(txttienhienthi.getText().toString()))
+        int tiendat = Utils.getMoneyI(tiendatbau.getText().toString())+Utils.getMoneyI(tiendatga.getText().toString())
+                +Utils.getMoneyI(tiendatca.getText().toString())+Utils.getMoneyI(tiendatcua.getText().toString())
+                +Utils.getMoneyI(tiendattom.getText().toString())+Utils.getMoneyI(tiendathuou.getText().toString());
+        if (tiendat>Utils.getMoneyI(txttienhienthi.getText().toString()))
             Toast.makeText(getApplicationContext(),"Không đủ số dư!",Toast.LENGTH_SHORT).show();
         else if (tiendat==0)
             Toast.makeText(getApplicationContext(),"Vui lòng đặt cược",Toast.LENGTH_SHORT).show();
@@ -124,9 +133,8 @@ public class BauCuaActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     quayxs.stop();
-                    Randomgt1();
-                    Randomgt2();
-                    Randomgt3();
+                    Randomgt1();Randomgt2();Randomgt3();
+                    //giatri1=giatri2=giatri3=0;
                     xuLyThuong();
                     btnxucsac.setVisibility(View.VISIBLE);
                 }
@@ -142,6 +150,7 @@ public class BauCuaActivity extends AppCompatActivity {
     private void Randomgt1() {
         randomxs1 = new Random();
         int rd1 = randomxs1.nextInt(6);
+        //int rd1 = 1;
         switch (rd1) {
             case 0:
                 xucsac1.setImageResource(dsQuan[0]);
@@ -173,6 +182,7 @@ public class BauCuaActivity extends AppCompatActivity {
     private void Randomgt2() {
         randomxs2 = new Random();
         int rd2 = randomxs2.nextInt(6);
+        //int rd2 = 1;
         switch (rd2) {
             case 0:
                 xucsac2.setImageResource(dsQuan[0]);
@@ -204,6 +214,7 @@ public class BauCuaActivity extends AppCompatActivity {
     private void Randomgt3() {
         randomxs3 = new Random();
         int rd3 = randomxs3.nextInt(6);
+        //int rd3 = 1;
         switch (rd3) {
             case 0:
                 xucsac3.setImageResource(dsQuan[0]);
@@ -233,92 +244,92 @@ public class BauCuaActivity extends AppCompatActivity {
     }
     private void xuLyBau(){
         if (giatri1 == 2) {
-            tienthuong += Integer.parseInt(tiendatbau.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatbau.getText().toString());
         }
         if (giatri2 == 2) {
-            tienthuong += Integer.parseInt(tiendatbau.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatbau.getText().toString());
         }
         if (giatri3 == 2) {
-            tienthuong += Integer.parseInt(tiendatbau.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatbau.getText().toString());
         }
         if (giatri1 != 2 && giatri2 != 2 && giatri3 != 2) {
-            tienthuong -= Integer.parseInt(tiendatbau.getText().toString());
+            tienthuong -= Utils.getMoneyI(tiendatbau.getText().toString());
         }
     }
     private void xuLyCa(){
         if (giatri1 == 0) {
-            tienthuong += Integer.parseInt(tiendatca.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatca.getText().toString());
         }
         if (giatri2 == 0) {
-            tienthuong += Integer.parseInt(tiendatca.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatca.getText().toString());
         }
         if (giatri3 == 0) {
-            tienthuong += Integer.parseInt(tiendatca.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatca.getText().toString());
         }
         if (giatri1 != 0 && giatri2 != 0 && giatri3 != 0) {
-            tienthuong -= Integer.parseInt(tiendatca.getText().toString());
+            tienthuong -= Utils.getMoneyI(tiendatca.getText().toString());
         }
     }
     private void xuLyCua(){
         if (giatri1 == 1) {
-            tienthuong += Integer.parseInt(tiendatcua.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatcua.getText().toString());
         }
         if (giatri2 == 1) {
-            tienthuong += Integer.parseInt(tiendatcua.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatcua.getText().toString());
         }
         if (giatri3 == 1) {
-            tienthuong += Integer.parseInt(tiendatcua.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatcua.getText().toString());
         }
         if (giatri1 != 1 && giatri2 != 1 && giatri3 != 1) {
-            tienthuong -= Integer.parseInt(tiendatcua.getText().toString());
+            tienthuong -= Utils.getMoneyI(tiendatcua.getText().toString());
         }
     }
     private void xuLyHuou(){
         if (giatri1 == 3) {
-            tienthuong += Integer.parseInt(tiendathuou.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendathuou.getText().toString());
         }
         if (giatri2 == 3) {
-            tienthuong += Integer.parseInt(tiendathuou.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendathuou.getText().toString());
         }
         if (giatri3 == 3) {
-            tienthuong += Integer.parseInt(tiendathuou.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendathuou.getText().toString());
         }
         if (giatri1 != 3 && giatri2 != 3 && giatri3 != 3) {
-            tienthuong -= Integer.parseInt(tiendathuou.getText().toString());
+            tienthuong -= Utils.getMoneyI(tiendathuou.getText().toString());
         }
     }
     private void xuLyTom(){
         if (giatri1 == 4) {
-            tienthuong += Integer.parseInt(tiendattom.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendattom.getText().toString());
         }
         if (giatri2 == 4) {
-            tienthuong += Integer.parseInt(tiendattom.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendattom.getText().toString());
         }
         if (giatri3 == 4) {
-            tienthuong += Integer.parseInt(tiendattom.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendattom.getText().toString());
         }
         if (giatri1 != 4 && giatri2 != 4 && giatri3 != 4) {
-            tienthuong -= Integer.parseInt(tiendattom.getText().toString());
+            tienthuong -= Utils.getMoneyI(tiendattom.getText().toString());
         }
     }
     private void xuLyGa(){
         if (giatri1 == 5) {
-            tienthuong += Integer.parseInt(tiendatga.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatga.getText().toString());
         }
         if (giatri2 == 5) {
-            tienthuong += Integer.parseInt(tiendatga.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatga.getText().toString());
         }
         if (giatri3 == 5) {
-            tienthuong += Integer.parseInt(tiendatga.getText().toString());
+            tienthuong += Utils.getMoneyI(tiendatga.getText().toString());
         }
         if (giatri1 != 5 && giatri2 != 5 && giatri3 != 5) {
-            tienthuong -= Integer.parseInt(tiendatga.getText().toString());
+            tienthuong -= Utils.getMoneyI(tiendatga.getText().toString());
         }
     }
     private void xuLyThuong(){
         xuLyBau();xuLyCa();xuLyCua();xuLyGa();xuLyHuou();xuLyTom();
         if (tienthuong>0) {
-            tienketqua.setText("+" + tienthuong);
+            tienketqua.setText("+"+Utils.formatMoney(tienthuong));
             tienketqua.setTextColor(Color.parseColor("#24fc03"));
             win = MediaPlayer.create(getApplicationContext(),R.raw.duoctien);
             win.start();
@@ -330,7 +341,7 @@ public class BauCuaActivity extends AppCompatActivity {
             },1500);
         }
         else if(tienthuong<0){
-            tienketqua.setText(""+tienthuong);
+            tienketqua.setText(Utils.formatMoney(tienthuong));
             lose = MediaPlayer.create(getApplicationContext(),R.raw.matien);
             lose.start();
             new Handler().postDelayed(new Runnable() {
@@ -343,7 +354,7 @@ public class BauCuaActivity extends AppCompatActivity {
         }
         else{
             tienketqua.setTextColor(Color.parseColor("#000000"));
-            tienketqua.setText("+"+tienthuong);
+            tienketqua.setText(Utils.formatMoney(tienthuong));
         }
         if (tienthuong<0)
         {
@@ -373,8 +384,8 @@ public class BauCuaActivity extends AppCompatActivity {
                 }
             });
         }
-        tienhienthi = Integer.parseInt(txttienhienthi.getText().toString())+tienthuong;
-        txttienhienthi.setText(""+tienhienthi);
+        tienhienthi = Utils.getMoneyI(txttienhienthi.getText().toString())+tienthuong;
+        txttienhienthi.setText(Utils.formatMoney(tienhienthi));
         tienthuong=0;
         tiendatbau.setText("0");
         tiendatcua.setText("0");
@@ -386,33 +397,33 @@ public class BauCuaActivity extends AppCompatActivity {
     }
 
     public void clickBau(View view) {
-        tienbau = Integer.parseInt(tiendatbau.getText().toString()) + Integer.parseInt(spinner1.getSelectedItem().toString());
-        tiendatbau.setText(""+tienbau);
+        tienbau = Utils.getMoneyI(tiendatbau.getText().toString()) + Utils.getMoneyI(spinner1.getSelectedItem().toString());
+        tiendatbau.setText(Utils.formatMoney(tienbau));
     }
 
     public void clickCa(View view) {
-        tienca = Integer.parseInt(tiendatca.getText().toString()) + Integer.parseInt(spinner1.getSelectedItem().toString());
-        tiendatca.setText(""+tienca);
+        tienca = Utils.getMoneyI(tiendatca.getText().toString()) + Utils.getMoneyI(spinner1.getSelectedItem().toString());
+        tiendatca.setText(Utils.formatMoney(tienca));
     }
 
     public void clickCua(View view) {
-        tiencua = Integer.parseInt(tiendatcua.getText().toString()) + Integer.parseInt(spinner1.getSelectedItem().toString());
-        tiendatcua.setText(""+tiencua);
+        tiencua = Utils.getMoneyI(tiendatcua.getText().toString()) + Utils.getMoneyI(spinner1.getSelectedItem().toString());
+        tiendatcua.setText(Utils.formatMoney(tiencua));
     }
 
     public void clickTom(View view) {
-        tientom = Integer.parseInt(tiendattom.getText().toString()) + Integer.parseInt(spinner1.getSelectedItem().toString());
-        tiendattom.setText(""+tientom);
+        tientom = Utils.getMoneyI(tiendattom.getText().toString()) + Utils.getMoneyI(spinner1.getSelectedItem().toString());
+        tiendattom.setText(Utils.formatMoney(tientom));
     }
 
     public void clickGa(View view) {
-        tienga = Integer.parseInt(tiendatga.getText().toString()) + Integer.parseInt(spinner1.getSelectedItem().toString());
-        tiendatga.setText(""+tienga);
+        tienga = Utils.getMoneyI(tiendatga.getText().toString()) + Utils.getMoneyI(spinner1.getSelectedItem().toString());
+        tiendatga.setText(Utils.formatMoney(tienga));
     }
 
     public void clickHuou(View view) {
-        tienhuou = Integer.parseInt(tiendathuou.getText().toString()) + Integer.parseInt(spinner1.getSelectedItem().toString());
-        tiendathuou.setText(""+tienhuou);
+        tienhuou = Utils.getMoneyI(tiendathuou.getText().toString()) + Utils.getMoneyI(spinner1.getSelectedItem().toString());
+        tiendathuou.setText(Utils.formatMoney(tienhuou));
     }
 
     public void xoaCuocBC(View view) {
@@ -425,17 +436,26 @@ public class BauCuaActivity extends AppCompatActivity {
     }
 
     public void Deposit(View view) {
-        ApiClient.getApiService().Deposit(new DW(logedInUser.getUsername(),"100000")).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                int ez = Integer.parseInt(txttienhienthi.getText().toString())+100000;
-                txttienhienthi.setText(""+ez);
-            }
+        float b = 0;
+        String a = editText.getText().toString().trim();
+        try {
+            b = Float.parseFloat(a);
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Vui lòng nhập số tiền",Toast.LENGTH_SHORT).show();
+        }
+        float finalB = b;
+        ApiClient.getApiService().Deposit(new DW(logedInUser.getUsername(), a)).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    float ez = Utils.getMoney(txttienhienthi.getText().toString()) + finalB;
+                    txttienhienthi.setText(Utils.formatMoney(ez));
+                }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+            editText.setText("");
     }
 }
